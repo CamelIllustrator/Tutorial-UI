@@ -26,6 +26,8 @@ import ej.mwt.stylesheet.cascading.CascadingStylesheet;
 import ej.mwt.stylesheet.selector.ClassSelector;
 import ej.mwt.stylesheet.selector.TypeSelector;
 import ej.widget.basic.Label;
+import ej.widget.container.LayoutOrientation;
+import ej.widget.container.List;
 
 /**
  * A page that represents a watchface.
@@ -102,9 +104,15 @@ public class WatchfacePage extends Page {
 		 */
 
 		// WRITE CODE HERE
+    List list = new List(LayoutOrientation.VERTICAL);
+    list.addChild(this.heartRate);
+    list.addChild(this.steps);
+    list.addChild(this.distance);
+    list.addChild(clock);
+    list.addChild(this.battery);
 
 		// returns a temporary label placeholder, replace with the actual widget
-		return new Label("Digital watchface"); //$NON-NLS-1$
+		return list;
 	}
 
 	/**
