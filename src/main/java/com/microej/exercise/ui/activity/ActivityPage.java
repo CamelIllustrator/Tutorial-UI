@@ -88,6 +88,8 @@ public class ActivityPage extends Page {
 		int stepCount = model.getStepCount();
 
 		// WRITE CODE HERE
+    this.activityProgress.setValue(stepCount);
+    this.activityProgress.requestRender();
 	}
 
 }
