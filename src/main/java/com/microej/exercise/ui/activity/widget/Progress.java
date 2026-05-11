@@ -47,7 +47,7 @@ public class Progress extends Widget implements MotionAnimationListener {
 
 	private final int goal;
 
-	private final boolean showValue;
+	private boolean showValue;
 
 	private final Animator animator;
 
@@ -167,6 +167,11 @@ public class Progress extends Widget implements MotionAnimationListener {
 		int type = Event.getType(event);
 		if (type == Pointer.EVENT_TYPE) {
 			int action = Buttons.getAction(event);
+      if (action == Buttons.RELEASED) {
+        this.showValue = !this.showValue;
+        requestRender();
+        return true;
+      }
 			/**
 			 * STEP 8: Change the displayed text when the user clicks (i.e., alternate between the value and the goal
 			 * progress).
