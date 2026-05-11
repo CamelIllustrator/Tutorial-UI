@@ -18,13 +18,16 @@ import com.microej.exercise.ui.watchface.widget.IconLabel;
 import com.microej.exercise.ui.watchface.widget.WatchHands;
 import ej.microui.display.Colors;
 import ej.microui.display.Font;
+import ej.microui.display.Image;
 import ej.mwt.Widget;
 import ej.mwt.style.EditableStyle;
+import ej.mwt.style.background.ImageBackground;
 import ej.mwt.style.background.RectangularBackground;
 import ej.mwt.stylesheet.cascading.CascadingStylesheet;
 import ej.mwt.stylesheet.selector.ClassSelector;
 import ej.mwt.stylesheet.selector.TypeSelector;
 import ej.widget.basic.Label;
+import ej.widget.container.Canvas;
 
 /**
  * A page that represents a watchface.
@@ -96,8 +99,14 @@ public class WatchfacePage extends Page {
 		 * 3. Return the canvas.
 		 */
 
+    Canvas canvas = new Canvas();
+    canvas.addChild(this.heartRate, 110, 5, 170, 54);
+    canvas.addChild(clock, 110, 70, 185, 65);
+    canvas.addChild(this.steps, 53, 200, 125, 55);
+    canvas.addChild(this.distance, 215, 200, 125, 55);
+    canvas.addChild(this.battery, 183, 352, 32, 32);
 		// returns a temporary label placeholder, replace with the actual widget
-		return new Label("Digital watchface"); //$NON-NLS-1$
+		return canvas;
 	}
 
 	/**
@@ -122,11 +131,11 @@ public class WatchfacePage extends Page {
 
 		// defines the style of the root container of the digital watchface
 		EditableStyle style = stylesheet.getSelectorStyle(new ClassSelector(ClassIdentifiers.DIGITAL_WATCHFACE));
-		style.setBackground(new RectangularBackground(Colors.BLACK));
+		style.setBackground(new ImageBackground(Image.getImage("/step3/background.png")));
 
 		// defines the style of the heart rate value
 		style = stylesheet.getSelectorStyle(new ClassSelector(ClassIdentifiers.HEART_RATE_VALUE));
-		style.setColor(Colors.WHITE);
+		style.setColor(Colors.BLACK);
 		Font mediumFont = Fonts.getMediumFont();
 		style.setFont(mediumFont);
 		// sets the color to use for the icon with a custom extra field
@@ -134,21 +143,21 @@ public class WatchfacePage extends Page {
 
 		// defines the style of the step value
 		style = stylesheet.getSelectorStyle(new ClassSelector(ClassIdentifiers.STEP_VALUE));
-		style.setColor(Colors.WHITE);
+		style.setColor(Colors.BLACK);
 		style.setFont(mediumFont);
 		// sets the color to use for the icon with a custom extra field
-		style.setExtraInt(IconLabel.EXTRA_FIELD_ICON_COLOR, Colors.WHITE);
+		style.setExtraInt(IconLabel.EXTRA_FIELD_ICON_COLOR, Colors.BLACK);
 
 		// defines the style of the distance value
 		style = stylesheet.getSelectorStyle(new ClassSelector(ClassIdentifiers.DISTANCE_VALUE));
-		style.setColor(Colors.WHITE);
+		style.setColor(Colors.BLACK);
 		style.setFont(mediumFont);
 		// sets the color to use for the icon with a custom extra field
-		style.setExtraInt(IconLabel.EXTRA_FIELD_ICON_COLOR, Colors.WHITE);
+		style.setExtraInt(IconLabel.EXTRA_FIELD_ICON_COLOR, Colors.BLACK);
 
 		// defines the style of the digital clock
 		style = stylesheet.getSelectorStyle(new TypeSelector(DigitalClock.class));
-		style.setColor(Colors.WHITE);
+		style.setColor(Colors.BLACK);
 		style.setFont(Fonts.getLargeFont());
 		// sets the font to use for the seconds with a custom extra field
 		style.setExtraObject(DigitalClock.EXTRA_FIELD_SECONDS_FONT, Fonts.getSmallFont());
