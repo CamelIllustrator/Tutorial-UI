@@ -143,7 +143,7 @@ public class WatchfacePage extends Page {
 		 *
 		 * Hint: use the Font.getFont() API.
 		 */
-		style.setFont(Fonts.getLargeFont());
+		// style.setFont(Fonts.getLargeFont());
 		// sets the font to use for the seconds with a custom extra field
 		style.setExtraObject(DigitalClock.EXTRA_FIELD_SECONDS_FONT, Fonts.getSmallFont());
 
