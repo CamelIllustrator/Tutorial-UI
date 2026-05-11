@@ -6,6 +6,7 @@
  */
 package com.microej.exercise.ui.activity.widget;
 
+import ej.drawing.ShapePainter;
 import ej.microui.MicroUI;
 import ej.microui.display.Font;
 import ej.microui.display.GraphicsContext;
@@ -165,6 +166,11 @@ public class Progress extends Widget implements MotionAnimationListener {
 		int barY = textY + textHeight;
 
 		// WRITE CODE HERE
+    g.setColor(accentColor);
+    Painter.fillRectangle(g, 0, barY, progressWidth, barThickness);
+
+    g.setColor(secondaryColor);
+    Painter.fillRectangle(g, progressWidth, barY, contentWidth - progressWidth, barThickness);
 	}
 
 	@Override
