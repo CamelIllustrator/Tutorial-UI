@@ -137,6 +137,7 @@ public class WatchfacePage extends Page {
 		// defines the style of the digital clock
 		style = stylesheet.getSelectorStyle(new TypeSelector(DigitalClock.class));
 		style.setColor(Colors.BLACK);
+    style.setFont(Font.getFont("/step5/Jokerman_47px-500.ejf"));
 		/**
 		 * Step 5: replace the font used by the digital clock with the newly created one.
 		 *
