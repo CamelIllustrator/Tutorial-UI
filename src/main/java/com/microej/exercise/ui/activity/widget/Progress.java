@@ -13,6 +13,9 @@ import ej.microui.display.Painter;
 import ej.microui.event.Event;
 import ej.microui.event.generator.Buttons;
 import ej.microui.event.generator.Pointer;
+import ej.motion.Function;
+import ej.motion.Motion;
+import ej.motion.quart.QuartEaseInFunction;
 import ej.mwt.Widget;
 import ej.mwt.animation.Animator;
 import ej.mwt.style.Style;
@@ -43,7 +46,7 @@ public class Progress extends Widget implements MotionAnimationListener {
 	private static final int MAX_PERCENT = 100;
 	private static final int MAX_GOAL = 99999;
 
-	private final int value;
+	private int value;
 
 	private final int goal;
 
@@ -109,6 +112,10 @@ public class Progress extends Widget implements MotionAnimationListener {
 		 */
 
 		// WRITE CODE HERE
+    Function function = QuartEaseInFunction.INSTANCE;
+    Motion motion = new Motion(function, this.value, newValue, ANIMATION_DURATION);
+    MotionAnimation motionAnimation = new MotionAnimation(this.animator, motion, this);
+    startAnimation(motionAnimation);
 	}
 
 	@Override
@@ -124,6 +131,8 @@ public class Progress extends Widget implements MotionAnimationListener {
 		 */
 
 		// WRITE CODE HERE
+    this.value = value;
+    requestRender();
 	}
 
 	private void startAnimation(final MotionAnimation animation) {
