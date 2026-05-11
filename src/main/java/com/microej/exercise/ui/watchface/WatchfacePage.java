@@ -25,6 +25,7 @@ import ej.mwt.style.outline.FlexibleOutline;
 import ej.mwt.stylesheet.cascading.CascadingStylesheet;
 import ej.mwt.stylesheet.selector.ClassSelector;
 import ej.mwt.stylesheet.selector.TypeSelector;
+import ej.mwt.util.Alignment;
 import ej.widget.container.Dock;
 import ej.widget.container.Grid;
 import ej.widget.container.LayoutOrientation;
@@ -130,27 +131,28 @@ public class WatchfacePage extends Page {
 
 		// defines the style of the root container of the digital watchface
 		EditableStyle style = stylesheet.getSelectorStyle(new ClassSelector(ClassIdentifiers.DIGITAL_WATCHFACE));
-		style.setBackground(new RectangularBackground(Colors.BLACK));
+		style.setBackground(new RectangularBackground(Colors.TEAL));
 		style.setPadding(new FlexibleOutline(10, 25, 10, 25));
 
 		// defines the style of the heart rate value
 		style = stylesheet.getSelectorStyle(new ClassSelector(ClassIdentifiers.HEART_RATE_VALUE));
 		style.setColor(Colors.WHITE);
 		Font mediumFont = Fonts.getMediumFont();
-		style.setFont(mediumFont);
+		Font largeFont = Fonts.getLargeFont();
+		style.setFont(largeFont);
 		// sets the color to use for the icon with a custom extra field
-		style.setExtraInt(IconLabel.EXTRA_FIELD_ICON_COLOR, 0xff3131);
+		style.setExtraInt(IconLabel.EXTRA_FIELD_ICON_COLOR, Colors.BLUE);
 
 		// defines the style of the step value
 		style = stylesheet.getSelectorStyle(new ClassSelector(ClassIdentifiers.STEP_VALUE));
-		style.setColor(Colors.WHITE);
+		style.setColor(Colors.YELLOW);
 		style.setFont(mediumFont);
 		// sets the color to use for the icon with a custom extra field
 		style.setExtraInt(IconLabel.EXTRA_FIELD_ICON_COLOR, Colors.WHITE);
 
 		// defines the style of the distance value
 		style = stylesheet.getSelectorStyle(new ClassSelector(ClassIdentifiers.DISTANCE_VALUE));
-		style.setColor(Colors.WHITE);
+		style.setColor(Colors.YELLOW);
 		style.setFont(mediumFont);
 		// sets the color to use for the icon with a custom extra field
 		style.setExtraInt(IconLabel.EXTRA_FIELD_ICON_COLOR, Colors.WHITE);
@@ -159,12 +161,14 @@ public class WatchfacePage extends Page {
 		style = stylesheet.getSelectorStyle(new TypeSelector(DigitalClock.class));
 		style.setColor(Colors.WHITE);
 		style.setFont(Fonts.getLargeFont());
+    style.setHorizontalAlignment(Alignment.HCENTER);
+    style.setVerticalAlignment(Alignment.BOTTOM);
 		// sets the font to use for the seconds with a custom extra field
-		style.setExtraObject(DigitalClock.EXTRA_FIELD_SECONDS_FONT, Fonts.getSmallFont());
+		style.setExtraObject(DigitalClock.EXTRA_FIELD_SECONDS_FONT, Fonts.getMediumFont());
 
 		// defines the style of the battery level indicator
 		style = stylesheet.getSelectorStyle(new TypeSelector(BatteryLevel.class));
-		style.setColor(Colors.WHITE);
+		style.setColor(Colors.BLACK);
 	}
 
 	/**
