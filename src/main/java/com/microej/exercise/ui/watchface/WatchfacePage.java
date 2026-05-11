@@ -110,7 +110,7 @@ public class WatchfacePage extends Page {
 	public void populateStylesheet(CascadingStylesheet stylesheet) {
 		// defines the style of the root container of the digital watchface
 		EditableStyle style = stylesheet.getSelectorStyle(new ClassSelector(ClassIdentifiers.DIGITAL_WATCHFACE));
-		style.setBackground(new ImageBackground(Image.getImage("/step3/background.png")));
+		style.setBackground(new ImageBackground(Image.getImage("/step4/background.png")));
 
 		// defines the style of the heart rate value
 		style = stylesheet.getSelectorStyle(new ClassSelector(ClassIdentifiers.HEART_RATE_VALUE));
