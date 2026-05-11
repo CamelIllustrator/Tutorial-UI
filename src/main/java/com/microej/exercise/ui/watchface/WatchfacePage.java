@@ -15,6 +15,7 @@ import com.microej.exercise.ui.util.TimeHelper;
 import com.microej.exercise.ui.watchface.widget.BatteryLevel;
 import com.microej.exercise.ui.watchface.widget.DigitalClock;
 import com.microej.exercise.ui.watchface.widget.IconLabel;
+import com.microej.exercise.ui.watchface.widget.SwipeContainer;
 import com.microej.exercise.ui.watchface.widget.WatchHands;
 import ej.microui.display.Colors;
 import ej.microui.display.Font;
@@ -61,9 +62,12 @@ public class WatchfacePage extends Page {
 		 */
 
 		// WRITE CODE HERE
-
+    SwipeContainer swipeContainer = new SwipeContainer();
 		Widget digital = createDigital();
-		return digital;
+    swipeContainer.addChild(digital);
+    Widget analog = createAnalog();
+    swipeContainer.addChild(analog);
+    return swipeContainer;
 	}
 
 	/**
