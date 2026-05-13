@@ -4,6 +4,8 @@
  */
 package com.microej.exercise.ui.parameters.widget;
 
+import com.microej.exercise.ui.util.Model;
+
 import ej.drawing.ShapePainter;
 import ej.microui.display.Font;
 import ej.microui.display.GraphicsContext;
@@ -28,6 +30,7 @@ public class RadioButton extends Widget {
 
 	private final String text;
 	private final RadioButtonGroup group;
+  private final String locale;
 
 	/**
 	 * Creates a radio button with the given text to display.
@@ -37,8 +40,9 @@ public class RadioButton extends Widget {
 	 * @param group
 	 *            the group to which the radio button should belong.
 	 */
-	public RadioButton(String text, RadioButtonGroup group) {
+	public RadioButton(String locale, String text, RadioButtonGroup group) {
 		super(true);
+    this.locale = locale;
 		this.text = text;
 		this.group = group;
 	}
@@ -83,6 +87,7 @@ public class RadioButton extends Widget {
 			int action = Buttons.getAction(event);
 			if (action == Buttons.RELEASED) {
 				this.group.setChecked(this);
+        Model.getInstance().setCurrentLocale(this.locale);
 				return true;
 			}
 		}

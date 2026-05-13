@@ -41,11 +41,11 @@ public class ParametersPage extends Page {
         List list = new List(LayoutOrientation.VERTICAL);
 
         RadioButtonGroup group = new RadioButtonGroup();
-        RadioButton radioButton1 = new RadioButton("English", group);
+        RadioButton radioButton1 = new RadioButton("en_US", "English", group);
         radioButton1.addClassSelector(ClassIdentifiers.RADIO_BUTTON);
-        RadioButton radioButton2 = new RadioButton("Portuguese", group);
+        RadioButton radioButton2 = new RadioButton("pt_US", "Portuguese", group);
         radioButton2.addClassSelector(ClassIdentifiers.RADIO_BUTTON);
-        RadioButton radioButton3 = new RadioButton("French", group);
+        RadioButton radioButton3 = new RadioButton("fr_FR", "French", group);
         radioButton3.addClassSelector(ClassIdentifiers.RADIO_BUTTON);
 
         // checks the first button
