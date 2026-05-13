@@ -6,9 +6,13 @@
  */
 package com.microej.exercise.ui.parameters;
 
+import java.util.Set;
+
+import com.microej.exercise.ui.generated.Labels;
 import com.microej.exercise.ui.parameters.widget.RadioButton;
 import com.microej.exercise.ui.parameters.widget.RadioButtonGroup;
 import com.microej.exercise.ui.style.ClassIdentifiers;
+import com.microej.exercise.ui.util.Model;
 import com.microej.exercise.ui.util.Page;
 import ej.microui.display.Colors;
 import ej.mwt.Widget;
@@ -20,6 +24,7 @@ import ej.mwt.stylesheet.cascading.CascadingStylesheet;
 import ej.mwt.stylesheet.selector.ClassSelector;
 import ej.mwt.stylesheet.selector.TypeSelector;
 import ej.mwt.util.Alignment;
+import ej.nls.NLS;
 import ej.widget.basic.ImageWidget;
 import ej.widget.basic.Label;
 import ej.widget.container.LayoutOrientation;
@@ -27,47 +32,64 @@ import ej.widget.container.SimpleDock;
 import ej.widget.container.List;
 
 public class ParametersPage extends Page {
+    private SimpleDock dock;
+    private Label title;
+    private Label subtitle;
+
     @Override
     public Widget getWidget() {
-        SimpleDock dock = new SimpleDock(LayoutOrientation.VERTICAL);
-        dock.addClassSelector(ClassIdentifiers.PARAMETERS);
+        this.dock = new SimpleDock(LayoutOrientation.VERTICAL);
+        this.dock.addClassSelector(ClassIdentifiers.PARAMETERS);
+
+        // Set the current locale by calling the Model method you just updated.
+        String currentLocale = Model.getInstance().getCurrentLocale();
+
+        // Update the title Labels instantiation to use NLS and allow translation.
+        this.title = new Label(Labels.NLS.getMessage(Labels.Parameters)); //$NON-NLS-1$
 
         // adds a label that represents the title of the page at the top
-        Label title = new Label("Parameters"); //$NON-NLS-1$
-        title.addClassSelector(ClassIdentifiers.APPLICATION_TITLE);
-        dock.setCenterChild(title);
+        this.title.addClassSelector(ClassIdentifiers.APPLICATION_TITLE);
+        this.dock.setCenterChild(title);
 
         // creates a list of RadioButton
         List list = new List(LayoutOrientation.VERTICAL);
 
-        RadioButtonGroup group = new RadioButtonGroup();
-        RadioButton radioButton1 = new RadioButton("en_US", "English", group);
-        radioButton1.addClassSelector(ClassIdentifiers.RADIO_BUTTON);
-        RadioButton radioButton2 = new RadioButton("pt_US", "Portuguese", group);
-        radioButton2.addClassSelector(ClassIdentifiers.RADIO_BUTTON);
-        RadioButton radioButton3 = new RadioButton("fr_FR", "French", group);
-        radioButton3.addClassSelector(ClassIdentifiers.RADIO_BUTTON);
-
-        // checks the first button
-        group.setChecked(radioButton1);
-
         // creates a SimpleDock with an Image and a Label
         SimpleDock languagesDock = new SimpleDock(LayoutOrientation.HORIZONTAL);
         ImageWidget image = new ImageWidget("/step11/langIcon.png");
-        Label label = new Label("Languages"); //$NON-NLS-1$
+        this.subtitle = new Label(Labels.NLS.getMessage(Labels.Languages));
         languagesDock.setFirstChild(image);
-        languagesDock.setCenterChild(label);
+        languagesDock.setCenterChild(this.subtitle);
         languagesDock.addClassSelector(ClassIdentifiers.LANGUAGE_LABEL);
 
-        // adds all elements to the list
+        // adds the subtitle simpledock to the list
         list.addChild(languagesDock);
-        list.addChild(radioButton1);
-        list.addChild(radioButton2);
-        list.addChild(radioButton3);
 
-        dock.setLastChild(list);
+        RadioButtonGroup group = new RadioButtonGroup();
+        for (String locale: Labels.NLS.getAvailableLocales()) {
 
-        return dock;
+            RadioButton radio =
+                new RadioButton(
+                    locale,
+                    Labels.NLS.getDisplayName(locale),
+                    group
+                );
+
+            radio.addClassSelector(
+                ClassIdentifiers.RADIO_BUTTON
+            );
+
+            if(locale.equals(
+                Model.getInstance().getCurrentLocale())) {
+
+                group.setChecked(radio);
+            }
+
+            list.addChild(radio);
+        }
+
+        this.dock.setLastChild(list);
+        return this.dock;
     }
 
     @Override
@@ -99,5 +121,14 @@ public class ParametersPage extends Page {
         style.setHorizontalAlignment(Alignment.LEFT);
         style.setExtraInt(RadioButton.CHECKED_COLOR_FIELD, Colors.RED);
         style.setMargin(new UniformOutline(2));
+    }
+
+    @Override
+    public void update() {
+      this.title.setText(Labels.NLS.getMessage(Labels.Parameters));
+
+      this.subtitle.setText(Labels.NLS.getMessage(Labels.Languages));
+
+      this.dock.requestRender();
     }
 }
