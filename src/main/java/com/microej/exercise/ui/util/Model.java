@@ -14,6 +14,8 @@ import ej.observable.SimpleObservable;
 
 import java.util.Random;
 
+import com.microej.exercise.ui.generated.Labels;
+
 /**
  * Defines the data model for this application.
  *
@@ -152,6 +154,17 @@ public class Model extends SimpleObservable {
 	public int getHeartRate() {
 		return this.heartRate;
 	}
+
+  public String getCurrentLocale() {
+    return Labels.NLS.getCurrentLocale();
+  }
+
+  public void setCurrentLocale(String locale) {
+    Labels.NLS.setCurrentLocale(locale);
+
+    setChanged();
+    notifyObserver();
+  }
 
 	/**
 	 * Starts tracking the user and device data.
