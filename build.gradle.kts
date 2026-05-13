@@ -30,6 +30,9 @@ dependencies {
     implementation("ej.library.ui:widget:5.0.0")
     implementation("ej.library.util:observable:2.0.0")
 
+    // Adding binary-nls module
+    implementation("com.microej.library.runtime:binary-nls:3.1.0")
+
     // VEE Port
     microejVee("com.microej.veeport.generic:wearable:1.5.0")
 }
