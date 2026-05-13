@@ -1,0 +1,5 @@
+# Generated Labels class for NLS internationalization support
+# This class will be automatically generated during build time
+# and used to retrieve translated messages based on locale.
+
+com.microej.exercise.ui.generated.Labels
