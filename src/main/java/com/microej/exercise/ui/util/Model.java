@@ -14,6 +14,8 @@ import ej.observable.SimpleObservable;
 
 import java.util.Random;
 
+import com.microej.exercise.ui.generated.Labels;
+
 /**
  * Defines the data model for this application.
  *
@@ -176,7 +178,7 @@ public class Model extends SimpleObservable {
 	public String getCurrentLocale() {
 
 		// UPDATE CODE HERE
-		return null;
+		return Labels.NLS.getCurrentLocale();
 	}
 
 	/**
@@ -187,6 +189,7 @@ public class Model extends SimpleObservable {
 	 */
 	public void setCurrentLocale(String locale) {
 		// WRITE CODE HERE
+    Labels.NLS.setCurrentLocale(locale);
 
 		// the model data changed, notify the observer
 		setChanged();

@@ -4,6 +4,8 @@
  */
 package com.microej.exercise.ui.parameters.widget;
 
+import com.microej.exercise.ui.util.Model;
+
 import ej.drawing.ShapePainter;
 import ej.microui.display.Font;
 import ej.microui.display.GraphicsContext;
@@ -100,6 +102,7 @@ public class RadioButton extends Widget {
 				 */
 
 				// WRITE CODE HERE
+        Model.getInstance().setCurrentLocale(this.locale);
 
 				return true;
 			}

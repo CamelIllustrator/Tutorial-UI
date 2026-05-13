@@ -6,10 +6,12 @@
  */
 package com.microej.exercise.ui.parameters;
 
+import com.microej.exercise.ui.generated.Labels;
 import com.microej.exercise.ui.parameters.widget.RadioButton;
 import com.microej.exercise.ui.parameters.widget.RadioButtonGroup;
 import com.microej.exercise.ui.style.ClassIdentifiers;
 import com.microej.exercise.ui.style.Fonts;
+import com.microej.exercise.ui.util.Model;
 import com.microej.exercise.ui.util.Page;
 import ej.microui.display.Colors;
 import ej.mwt.Widget;
@@ -53,9 +55,10 @@ public class ParametersPage extends Page {
          */
 
         // WRITE CODE HERE
+        String currentLocale = Model.getInstance().getCurrentLocale();
 
         // adds a label that represents the title of the page at the top
-        this.title = new Label("Parameters");
+        this.title = new Label(Labels.NLS.getMessage(Labels.Parameters));
         this.title.addClassSelector(ClassIdentifiers.APPLICATION_TITLE);
         this.dock.setCenterChild(title);
 
@@ -65,7 +68,7 @@ public class ParametersPage extends Page {
         // creates a SimpleDock with an Image and a Label
         SimpleDock languagesDock = new SimpleDock(LayoutOrientation.HORIZONTAL);
         ImageWidget image = new ImageWidget("/step11/langIcon.png");
-        this.subtitle = new Label("Languages");
+        this.subtitle = new Label(Labels.NLS.getMessage(Labels.Languages));
         languagesDock.setFirstChild(image);
         languagesDock.setCenterChild(this.subtitle);
         languagesDock.addClassSelector(ClassIdentifiers.LANGUAGE_LABEL);
@@ -75,20 +78,27 @@ public class ParametersPage extends Page {
 
         RadioButtonGroup group = new RadioButtonGroup();
 
-        RadioButton radioButton1 = new RadioButton("en_US" , "English", group);
-        radioButton1.addClassSelector(ClassIdentifiers.RADIO_BUTTON);
-        RadioButton radioButton2 = new RadioButton("pt_US" , "Portuguese", group);
-        radioButton2.addClassSelector(ClassIdentifiers.RADIO_BUTTON);
-        RadioButton radioButton3 = new RadioButton("fr_FR" , "French", group);
-        radioButton3.addClassSelector(ClassIdentifiers.RADIO_BUTTON);
+        for (String locale: Labels.NLS.getAvailableLocales()) {
 
-        // adds all the radioButton to the list
-        list.addChild(radioButton1);
-        list.addChild(radioButton2);
-        list.addChild(radioButton3);
+            RadioButton radio =
+                new RadioButton(
+                    locale,
+                    Labels.NLS.getDisplayName(locale),
+                    group
+                );
 
-        // checks the first button
-        group.setChecked(radioButton1);
+            radio.addClassSelector(
+                ClassIdentifiers.RADIO_BUTTON
+            );
+
+            if(locale.equals(
+                Model.getInstance().getCurrentLocale())) {
+
+                group.setChecked(radio);
+            }
+
+            list.addChild(radio);
+        }
 
         this.dock.setLastChild(list);
 
@@ -141,5 +151,17 @@ public class ParametersPage extends Page {
      *
      */
 
-    // WRITE CODE HERE
+    @Override
+    public void update() {
+
+        this.title.setText(
+            Labels.NLS.getMessage(Labels.Parameters)
+        );
+
+        this.subtitle.setText(
+            Labels.NLS.getMessage(Labels.Languages)
+        );
+
+        this.dock.requestRender();
+    }
 }
