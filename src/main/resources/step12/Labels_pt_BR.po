@@ -1,0 +1,15 @@
+# Copyright 2025 MicroEJ Corp. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be found with this software.
+
+msgid ""
+msgstr ""
+"Language: pt_BR\n"
+"Language-Team: Portuguese\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+
+msgid "Parameters"
+msgstr "Parâmetros"
+
+msgid "Languages"
+msgstr "Idiomas"
