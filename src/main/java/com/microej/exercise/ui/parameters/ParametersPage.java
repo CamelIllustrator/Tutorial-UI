@@ -6,16 +6,23 @@
  */
 package com.microej.exercise.ui.parameters;
 
+import com.microej.exercise.ui.parameters.widget.RadioButton;
+import com.microej.exercise.ui.parameters.widget.RadioButtonGroup;
 import com.microej.exercise.ui.style.ClassIdentifiers;
 import com.microej.exercise.ui.util.Page;
 import ej.microui.display.Colors;
+import ej.microui.display.Image;
 import ej.mwt.Widget;
 import ej.mwt.style.EditableStyle;
 import ej.mwt.style.background.RectangularBackground;
+import ej.mwt.style.outline.FlexibleOutline;
 import ej.mwt.stylesheet.cascading.CascadingStylesheet;
 import ej.mwt.stylesheet.selector.ClassSelector;
+import ej.mwt.util.Alignment;
+import ej.widget.basic.ImageWidget;
 import ej.widget.basic.Label;
 import ej.widget.container.LayoutOrientation;
+import ej.widget.container.List;
 import ej.widget.container.SimpleDock;
 
 public class ParametersPage extends Page {
@@ -29,7 +36,6 @@ public class ParametersPage extends Page {
         title.addClassSelector(ClassIdentifiers.APPLICATION_TITLE);
 
         dock.setCenterChild(title);
-
         /**
          * STEP 11: Implement the Parameters page.
          *
@@ -55,6 +61,31 @@ public class ParametersPage extends Page {
          */
 
         // WRITE CODE HERE
+        SimpleDock simpleDock = new SimpleDock(LayoutOrientation.HORIZONTAL);
+        simpleDock.addClassSelector(ClassIdentifiers.SD_TITLE);
+        simpleDock.setFirstChild(new ImageWidget("/step11/langIcon.png"));
+        simpleDock.getFirstChild().addClassSelector(ClassIdentifiers.SD_IMAGE_WIDGET);
+        simpleDock.setCenterChild(new Label("Languages"));
+
+        // Radio Button
+        RadioButtonGroup group = new RadioButtonGroup();
+
+        RadioButton radioButton1 = new RadioButton("English", group);
+        radioButton1.addClassSelector(ClassIdentifiers.RADIO_BUTTON);
+        RadioButton radioButton2 = new RadioButton("French", group);
+        radioButton2.addClassSelector(ClassIdentifiers.RADIO_BUTTON);
+        RadioButton radioButton3 = new RadioButton("Portuguese", group);
+        radioButton3.addClassSelector(ClassIdentifiers.RADIO_BUTTON);
+        group.setChecked(radioButton1);
+
+        List list = new List(LayoutOrientation.VERTICAL);
+        list.addClassSelector(ClassIdentifiers.LIST_LANGUAGE);
+        list.addChild(simpleDock);
+        list.addChild(radioButton1);
+        list.addChild(radioButton2);
+        list.addChild(radioButton3);
+
+        dock.setLastChild(list);
 
         return dock;
     }
@@ -82,5 +113,28 @@ public class ParametersPage extends Page {
          */
 
         // WRITE CODE HERE
+        // Label
+        style = stylesheet.getSelectorStyle(new ClassSelector(ClassIdentifiers.APPLICATION_TITLE));
+        style.setMargin(new FlexibleOutline(20, 0, 0, 0));
+        style.setVerticalAlignment(Alignment.TOP);
+
+        // SimpleDock Languages
+        style = stylesheet.getSelectorStyle(new ClassSelector(ClassIdentifiers.SD_TITLE));
+        style.setHorizontalAlignment(Alignment.LEFT);
+        style.setPadding(new FlexibleOutline(0, 0, 20, 0));
+
+        // SimpleDock Image Widget
+        style = stylesheet.getSelectorStyle(new ClassSelector(ClassIdentifiers.SD_IMAGE_WIDGET));
+        style.setMargin(new FlexibleOutline(0, 15, 0, 0));
+
+        // List
+        style = stylesheet.getSelectorStyle(new ClassSelector(ClassIdentifiers.LIST_LANGUAGE));
+        style.setMargin(new FlexibleOutline(0, 0, 70, 100));
+
+        // Radio Button
+        style = stylesheet.getSelectorStyle(new ClassSelector(ClassIdentifiers.RADIO_BUTTON));
+        style.setHorizontalAlignment(Alignment.LEFT);
+		    style.setVerticalAlignment(Alignment.VCENTER);
+        style.setExtraInt(RadioButton.CHECKED_COLOR_FIELD, Colors.RED);
     }
 }

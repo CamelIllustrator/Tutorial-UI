@@ -46,4 +46,12 @@ public class ClassIdentifiers {
 
 	/** The class identifier for the parameters application. */
 	public static final int PARAMETERS = 7;
+
+  public static final int SD_TITLE = 8;
+
+  public static final int LIST_LANGUAGE = 9;
+
+  public static final int RADIO_BUTTON = 10;
+
+  public static final int SD_IMAGE_WIDGET = 11;
 }
